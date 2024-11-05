@@ -1,0 +1,47 @@
+[
+  {
+    "id": "e5b4f508-92e1-432d-9a7b-54aee45d9c7a",
+    "name": "Miguel Ferreira",
+    "email": "miferreira@gmail.com",
+    "user": "miguel.ferreira",
+    "pwd": "miguel123",
+    "level": "admin",
+    "status": "on"
+  },
+  {
+    "id": "0690a0fe-288c-454b-8c28-75d72a905645",
+    "name": "Gabriela dos Santos",
+    "email": "santo.gabi@gmail.com",
+    "user": "gabi.santos",
+    "pwd": "gabi123",
+    "level": "admin",
+    "status": "on"
+  },
+  {
+    "id": "2440ef24-1513-45d8-8750-c42d741eb6c6",
+    "name": "Rebecca Garcia",
+    "email": "rgarcia@gmail.com",
+    "user": "rebecca.g",
+    "pwd": "rebecca123",
+    "level": "funcionario",
+    "status": "on"
+  },
+  {
+    "id": "56f70864-e55c-4a7f-8369-02d2324627eb",
+    "name": "Valéria Campos",
+    "email": "valeria.campos@gmail.com",
+    "user": "val.campos",
+    "pwd": "gabriela123",
+    "level": "funcionario",
+    "status": "off"
+  },
+  {
+    "id": "dda30778-24d8-4a56-aaa0-017da63de993",
+    "name": "Fernanda Gomes",
+    "email": "fernandags@gmail.com",
+    "user": "fernanda.gomes",
+    "pwd": "fernanda123",
+    "level": "funcionario",
+    "status": "on"
+  }
+]
