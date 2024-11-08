@@ -2,23 +2,27 @@ import NavAdmin from '@/components/NavAdmin'
 import MenuEvents from '@/components/MenuEvents';
 import Head from 'next/head'
 import Link from 'next/link'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Axios from 'axios';
+import { useRouter } from 'next/router';
 
-export default function createevent() {
+export default function readEvent() {
   
-  const API_URL = "http://localhost:8080/api/events"
+  const API_URL = "http://localhost:8080/api/events/"
 
   const [event, setEvent] = useState({
-    // author_id: "",
+    event_id: "",
     event_title: "",
     event_description: "",
     event_comments: "",
     event_date: "",
     event_location: "",
     event_status: "",
-    // event_create_date ""
+    event_create_date: ""
   });
+
+  const router = useRouter();
+  const [pid] = useState(router.query.pid);
 
   const [message, setMensage] = useState({ message:"", status:""});
 
@@ -35,23 +39,24 @@ export default function createevent() {
     {value: 'false', text: 'Inativo'},
   ];
 
-  const handleChange = (evento) => {
-    const { name, value } = evento.target;
-    setEvent({
-      ...event,
-      [name]: value
-    });
-  };
 
-  const handleCreateEvent = async () => {
-    try {
-      const response = await Axios.post(API_URL, { event });
-      setMensage( { message: response.data.message , status: "ok"} );      
-    } catch (error) {
-      console.error('Erro ao criar o Evento:', error);
-      setMensage( { message: "Erro ao criar o Evento!", status: "error"} );
-    }
-  };
+     useEffect(() => {
+        const getEvent = async () => {
+          try {
+            const response = await Axios.get(API_URL + pid);
+            setMensage( { message: response.data.message , status: "ok"} ); 
+            setEvent( response.data.foundedEvent );
+          } catch (error) {
+            console.error('Erro ao buscar os eventos:', error);
+            setMensage( { message: "Erro ao buscar os Eventos!", status: "error"} );
+          }
+        };
+    
+        getEvent();
+    
+      }, []);
+
+
 
   return (
     <>
@@ -65,7 +70,7 @@ export default function createevent() {
         <MenuEvents />
         { 
           message.status==="" ? "" : 
-          message.status==="ok" ? <div className='alert alert-success' role='alert'> { message.message } <Link className='alert-link' href='/admin/events'>Voltar</Link></div> : 
+          message.status==="ok" ? "" : 
           <div className='alert alert-danger' role='alert'> { message.message } <Link className='alert-link' href='/admin/events'>Voltar</Link></div>
         }
       </div>
@@ -73,32 +78,32 @@ export default function createevent() {
       <div className="d-flex justify-content-center p-2">
         <div className="container">
             <div className="row border-bottom">
-                <h3> Cadastro de Evento </h3>
+                <h3> Detalhes do Evento </h3>
             
-                <form method="POST">
+                <form >
                 <div className="form-group">
                     <label className="form-label" htmlFor="event_title">Título</label>
-                    <input type="text" id="event_title" name="event_title" className="form-control" value={event.event_title} onChange={handleChange}/>
+                    <input type="text" id="event_title" name="event_title" className="form-control" value={event.event_title} readOnly/>
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="event_description">Descrição</label>
-                    <input type="text" id="event_description" name="event_description" className="form-control" value={event.event_description} onChange={handleChange} />
+                    <input type="text" id="event_description" name="event_description" className="form-control" value={event.event_description} readOnly/>
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="event_comments">Comentários</label>
-                    <input type="text" id="event_comments" name="event_comments" className="form-control" value={event.event_comments} onChange={handleChange} />
+                    <input type="text" id="event_comments" name="event_comments" className="form-control" value={event.event_comments} readOnly/>
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="event_date">Data</label>
-                    <input type="date" id="event_date" name="event_date" className="form-control" value={event.event_date} onChange={handleChange} />
+                    <input type="date" id="event_date" name="event_date" className="form-control" value={event.event_date} readOnly/>
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="event_location">Localização</label>
-                    <input type="text" id="event_location" name="event_location" className="form-control" value={event.event_location} onChange={handleChange} />
+                    <input type="text" id="event_location" name="event_location" className="form-control" value={event.event_location} readOnly/>
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="event_status">Status</label>
-                    <select className="form-select" id="event_status" name="event_status" value={event.event_status} onChange={handleChange}>
+                    <select className="form-select" id="event_status" name="event_status" value={event.event_status} readOnly>
                       {optionsStatus.map(option => (
                         <option key={option.value} value={option.value}>
                           {option.text}
@@ -106,8 +111,12 @@ export default function createevent() {
                       ))}
                     </select>
                 </div>
+                <div className="form-group">
+                    <label className="form-label" htmlFor="event_create_date">Data de Criação</label>
+                    <input type="text" id="event_create_date" name="event_create_date" className="form-control" value={ event.event_create_date } readOnly/>
+                </div>
                 <div className="form-group p-2">
-                    <button className="btn btn-outline-success" type="button" onClick={handleCreateEvent} >Salvar</button>
+                    {/* <button className="btn btn-outline-success" type="button" onClick={handleCreateUser} >Salvar</button> */}
                     <Link className="btn btn-outline-info" href="/admin/events">Voltar</Link>
                 </div>
                 </form>

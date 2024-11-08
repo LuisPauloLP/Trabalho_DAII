@@ -2,23 +2,27 @@ import NavAdmin from '@/components/NavAdmin'
 import MenuEvents from '@/components/MenuEvents';
 import Head from 'next/head'
 import Link from 'next/link'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Axios from 'axios';
+import { useRouter } from 'next/router';
 
-export default function createevent() {
+export default function updateEvent() {
   
-  const API_URL = "http://localhost:8080/api/events"
+  const API_URL = "http://localhost:8080/events/"
 
   const [event, setEvent] = useState({
-    // author_id: "",
+    event_id: "",
     event_title: "",
     event_description: "",
     event_comments: "",
     event_date: "",
     event_location: "",
     event_status: "",
-    // event_create_date ""
+    event_create_date: ""
   });
+
+  const router = useRouter();
+  const [pid] = useState(router.query.pid);
 
   const [message, setMensage] = useState({ message:"", status:""});
 
@@ -35,23 +39,42 @@ export default function createevent() {
     {value: 'false', text: 'Inativo'},
   ];
 
-  const handleChange = (evento) => {
-    const { name, value } = evento.target;
-    setEvent({
-      ...event,
-      [name]: value
-    });
-  };
 
-  const handleCreateEvent = async () => {
-    try {
-      const response = await Axios.post(API_URL, { event });
-      setMensage( { message: response.data.message , status: "ok"} );      
-    } catch (error) {
-      console.error('Erro ao criar o Evento:', error);
-      setMensage( { message: "Erro ao criar o Evento!", status: "error"} );
-    }
-  };
+     useEffect(() => {
+        const getEvent = async () => {
+          try {
+            const response = await Axios.get(API_URL + pid);
+            setMensage( { message: response.data.message , status: "ok"} ); 
+            setEvent( response.data.foundedEvent );
+          } catch (error) {
+            console.error('Erro ao buscar os eventos:', error);
+            setMensage( { message: "Erro ao buscar os Eventos!", status: "error"} );
+          }
+        };
+    
+        getEvent();
+    
+      }, []);
+      
+      const handleChange = (evento) => {
+        const { name, value } = evento.target;
+        setUser({
+          ...event,
+          [name]: value
+        });
+      };
+
+      const handleUpdateEvent = async () => {
+        try {
+          const response = await Axios.put(API_URL + pid, { event });
+          setMensage( { message: response.data.message , status: "ok"} );      
+        } catch (error) {
+          console.error('Erro ao alterar o Evento:', error);
+          setMensage( { message: "Erro ao alterar o Evento!", status: "error"} );
+        }
+      };
+
+
 
   return (
     <>
@@ -73,7 +96,7 @@ export default function createevent() {
       <div className="d-flex justify-content-center p-2">
         <div className="container">
             <div className="row border-bottom">
-                <h3> Cadastro de Evento </h3>
+                <h3> Edição de Evento </h3>
             
                 <form method="POST">
                 <div className="form-group">
@@ -106,8 +129,12 @@ export default function createevent() {
                       ))}
                     </select>
                 </div>
+                <div className="form-group">
+                    <label className="form-label" htmlFor="event_create_date">Data de Criação</label>
+                    <input type="text" id="event_create_date" name="event_create_date" className="form-control" value={ event.event_create_date } readOnly/>
+                </div>
                 <div className="form-group p-2">
-                    <button className="btn btn-outline-success" type="button" onClick={handleCreateEvent} >Salvar</button>
+                    <button className="btn btn-outline-success" type="button" onClick={handleUpdateEvent} >Salvar</button>
                     <Link className="btn btn-outline-info" href="/admin/events">Voltar</Link>
                 </div>
                 </form>
