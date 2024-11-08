@@ -80,7 +80,7 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const routes = require('./routes');
 
 const app = express();
-const port = 3000;
+const port = 8080;
 
 // Middleware CORS configurado corretamente
 app.use(cors());
@@ -108,7 +108,7 @@ const options = {
                 name: 'Luís Paulo, Maria Fernanda Esteves, Miguel Lumertz, Natali Elias e Rafaela Nicoski'
             },
         },
-        servers: [{ url: "http://localhost:3000/", description: 'Server de desenvolvimento' }],
+        servers: [{ url: "http://localhost:8080/", description: 'Server de desenvolvimento' }],
     },
     apis: [__dirname + "/routes/*.js"],
 };

@@ -120,6 +120,7 @@ const Event = mongoose.model('Event', eventsSchema);
 router.get("/", async (req, res) => {
   try {
     const foundedEvent = await Event.find();
+    console.log('Objetos encontrados com sucesso!');
     res.status(200).json(foundedEvent);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -158,7 +159,7 @@ router.get("/", async (req, res) => {
 router.get("/:pid", async (req, res) => {
   const pid = req.params.pid;
   try {
-    const foundedEvent = await Event.findById({ pid });
+    const foundedEvent = await Event.findById( pid );
     console.log('Objeto encontrado com sucesso!');
     res.json({ message: 'Evento encontrado com sucesso!', foundedEvent });
   } catch (err) {
@@ -292,15 +293,16 @@ router.post("/", async (req, res) => {
 router.put("/:pid", async (req, res) => {
   const pid = req.params.pid;
   const newEvent = req.body.event;
+  Console.log(newEvent);
   try {
     const updatedEvent = await Event.findByIdAndUpdate(pid,
-      { title: newEvent.title,
-        description: newEvent.description,
-        comments: newEvent.comments,
-        location: newEvent.location,
-        date: newEvent.date,
+      { title: newEvent.event_title,
+        description: newEvent.event_description,
+        comments: newEvent.event_comments,
+        date: newEvent._date,
+        location: newEvent.event_location,
         //time,
-        status: newEvent.status
+        status: newEvent.event_status
        }, { new: true });
     console.log('Objeto Atualizado:', updatedEvent);
     //res.json(updatedEvent);
