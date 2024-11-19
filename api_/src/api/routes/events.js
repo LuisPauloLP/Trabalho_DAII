@@ -19,7 +19,6 @@ const eventsSchema = new mongoose.Schema({
   event_location: String,
   event_date: { type: Date, required: true },
   event_time: { type: String, required: true },
-  create_date: { type: Date, default: Date.now },
   event_status: Boolean,
   author_create_date: { type: Date, default: Date.now }
 });
@@ -68,7 +67,7 @@ router.post("/", async (req, res) => {
 // PUT "/events"
 router.put("/:pid", async (req, res) => {
   const pid = req.params.pid;
-  const newEvent = req.body;
+  const newEvent = req.body.event;
   console.log(newEvent);
   try {
     const updatedEvent = await Event.findByIdAndUpdate(pid,
