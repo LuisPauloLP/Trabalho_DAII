@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/bc', { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.on('connected', () => {
-  console.log('MongoDB conectado');
+  console.log('MongoDB conectado Profissionais');
 });
 
 const professionalsSchema = new mongoose.Schema({
