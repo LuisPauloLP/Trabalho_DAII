@@ -207,6 +207,86 @@ body {
   transition: transform 0.3s ease;
 }
 
+/* Container geral da página */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto; /* Centraliza o conteúdo */
+  padding: 2rem; /* Espaçamento interno */
+  background-color: #F4F7F6; /* Cor de fundo suave */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Título da seção */
+h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #5C7362; /* Cor verde da navegação */
+  margin-bottom: 1.5rem; /* Espaçamento abaixo do título */
+  border-bottom: 2px solid #5C7362; /* Linha de separação abaixo do título */
+  padding-bottom: 0.5rem;
+}
+
+/* Tabela */
+.table {
+  width: 100%;
+  margin-top: 2rem; /* Espaçamento superior */
+  border-collapse: collapse; /* Remove espaçamento entre as células */
+}
+
+/* Estilo das células da tabela */
+.table th, .table td {
+  padding: 1rem;
+  text-align: left;
+  font-size: 1rem;
+  border-bottom: 1px solid #e0e0e0; /* Linha de separação suave entre as linhas */
+}
+
+.table th {
+  background-color: #5C7362; /* Cor do cabeçalho */
+  color: #FFFFFF; /* Cor do texto no cabeçalho */
+  font-weight: bold;
+}
+
+.table tbody tr:hover {
+  background-color: #A8D5BA; /* Cor de fundo suave ao passar o mouse */
+  cursor: pointer; /* Indica que a linha é clicável */
+}
+
+/* Estilo da ação do usuário */
+.table td .UserAction {
+  background-color: #5C7362; /* Cor de fundo dos botões de ação */
+  color: #FFFFFF; /* Cor do texto */
+  padding: 0.5rem 1rem;
+  border-radius: 4px; /* Bordas arredondadas */
+  text-decoration: none; /* Remove sublinhado */
+  transition: background-color 0.3s ease;
+}
+
+/* Efeito de hover para a ação do usuário */
+.table td .UserAction:hover {
+  background-color: #A8D5BA; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo para as margens e espaçamento da página */
+.row {
+  margin-top: 1rem; /* Espaçamento superior */
+  margin-bottom: 1rem; /* Espaçamento inferior */
+}
+
+/* Ajuste de responsividade - Em telas menores, a tabela deve ocupar o máximo possível */
+@media (max-width: 768px) {
+  .table th, .table td {
+    font-size: 0.9rem; /* Reduz o tamanho da fonte para telas pequenas */
+    padding: 0.8rem; /* Ajuste no padding */
+  }
+
+  h3 {
+    font-size: 1.5rem; /* Ajuste no tamanho do título */
+  }
+}
+
+
 
 
 

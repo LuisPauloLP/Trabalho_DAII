@@ -76,7 +76,7 @@ export default function readuser() {
         }
       </div>
   
-      <div className="d-flex justify-content-center p-2">
+      <div >
         <div className="container">
             <div className="row border-bottom">
                 <h3> Detalhes do Usuário </h3>

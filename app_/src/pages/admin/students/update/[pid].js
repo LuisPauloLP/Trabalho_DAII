@@ -100,8 +100,8 @@ export default function updatestudent() {
         }
       </div>
   
-      <div id="tabela">
-        <div>
+      <div >
+        <div className="container">
             <div className="row border-bottom">
                 <h3> Edição de Estudante </h3>
             

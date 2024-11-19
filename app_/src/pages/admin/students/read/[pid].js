@@ -75,8 +75,8 @@ export default function readstudent() {
         }
       </div>
   
-      <div id="tabela">
-        <div>
+      <div >
+        <div className="container">
             <div className="row border-bottom">
                 <h3> Detalhes do Estudante </h3>
             

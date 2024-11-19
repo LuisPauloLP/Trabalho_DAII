@@ -18,7 +18,6 @@ export default function createevent() {
     event_location: "",
     event_time: "",
     event_status: "",
-    // event_create_date ""
   });
 
   const [message, setMensage] = useState({ message:"", status:""});

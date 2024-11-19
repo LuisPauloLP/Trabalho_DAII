@@ -81,8 +81,8 @@ export default function DeleteStudent() {
         }
       </div>
 
-      <div id="tabela">
-        <div>
+      <div >
+        <div className="container">
           <div className="row border-bottom">
             <h3>Deletar Estudante</h3>
             <form>

@@ -70,8 +70,8 @@ export default function createstudent() {
         }
       </div>
   
-      <div id="tabela">
-        <div>
+      <div >
+        <div className="container">
             <div className="row border-bottom">
                 <h3> Cadastro de Estudante </h3>
             

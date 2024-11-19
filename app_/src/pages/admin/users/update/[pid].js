@@ -93,7 +93,7 @@ export default function updateuser() {
         }
       </div>
   
-      <div className="d-flex justify-content-center p-2">
+      <div>
         <div className="container">
             <div className="row border-bottom">
                 <h3> Edição de Usuário </h3>

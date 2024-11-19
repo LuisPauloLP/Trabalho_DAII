@@ -19,7 +19,6 @@ export default function readEvent() {
     event_location: "",
     event_time: "",
     event_status: "",
-    event_create_date: ""
   });
 
   const router = useRouter();
@@ -108,10 +107,6 @@ export default function readEvent() {
                         </option>
                       ))}
                     </select>
-                </div>
-                <div className="form-group">
-                    <label className="form-label" htmlFor="event_create_date">Data de Criação</label>
-                    <input type="text" id="event_create_date" name="event_create_date" className="form-control" value={ event.event_create_date } readOnly/>
                 </div>
                 <div className="form-group p-2">
                     {/* <button className="btn btn-outline-success" type="button" onClick={handleCreateUser} >Salvar</button> */}

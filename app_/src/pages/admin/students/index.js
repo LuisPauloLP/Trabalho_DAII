@@ -40,8 +40,8 @@ export default function students() {
       </div>
 
   
-      <div id="tabela">
-        <div>
+      <div>
+        <div className="container">
         <div className="row border-bottom">
         <h3> Lista de Estudantes </h3>
         
