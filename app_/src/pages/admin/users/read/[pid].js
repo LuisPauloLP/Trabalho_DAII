@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 
 export default function readuser() {
   
-  const API_URL = "http://localhost:8080/api/users/"
+  const API_URL = "http://localhost:3030/api/users/"
 
   const [user, setUser] = useState({
     author_id: "",

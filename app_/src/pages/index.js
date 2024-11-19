@@ -13,7 +13,7 @@ export default function Home() {
       <NavHome />
       </div>
 
-      <div className="d-flex justify-content-center p-2">
+      <div>
         <div className="container">
           <div className="row border-bottom">
               <h3> Sistema de Base de Conhecimentos</h3>

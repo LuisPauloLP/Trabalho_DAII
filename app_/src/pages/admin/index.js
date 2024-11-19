@@ -15,24 +15,9 @@ export default function admin() {
         <NavAdmin />
         <MenuAdmin />
       </div>
-  
-      <div className="d-flex justify-content-center p-2">
-        <div className="container">
-          <div className="row border-bottom">
-              <h3> Lista de Contas Atrasadas</h3>
-          </div>
-          <div className="row border-bottom">
-              <h3> Lista de Lancaçamentos</h3>
-          </div>
-          <div className="row border-bottom">
-              <h3> Buscador de Lançamentos</h3>
-              <div className="input-group">
-                  <input type="text" className="form-control" placeholder="Palavra-chave" aria-describedby="button-busca" />
-                  <button className="btn btn-outline-secondary" type="button" id="button-busca">Buscar</button>
-              </div>
-          </div>
-        </div>
-      </div>  
+      <div>
+        <h3>HOME</h3>
+      </div>
   </>
   )
 }

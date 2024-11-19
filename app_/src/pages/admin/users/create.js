@@ -7,7 +7,7 @@ import Axios from 'axios';
 
 export default function createuser() {
   
-  const API_URL = "http://localhost:8080/api/users"
+  const API_URL = "http://localhost:3030/api/users"
 
   const [user, setUser] = useState({
     // author_id: "",
@@ -70,7 +70,7 @@ export default function createuser() {
         }
       </div>
   
-      <div className="d-flex justify-content-center p-2">
+      <div >
         <div className="container">
             <div className="row border-bottom">
                 <h3> Cadastro de Usuário </h3>

@@ -10,27 +10,39 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </Head>
     <div>
-    <form action="/admin" method="POST">
-    <div className="d-flex justify-content-center p-2">
-        <div className="col-md-4">
-            <div>
-                <h2>Login</h2>
-            </div>
-            <div className="form-group">
-                <label className="form-label" htmlFor="username">Usuário</label>
-                <input type="text" id="username" name="username" className="form-control" />
-            </div>
-            <div className="form-group">
-                <label className="form-label" htmlFor="password">Senha</label>  
-                <input type="password" id="password" name="password" className="form-control" />
-            </div>
-            <div className="form-group p-2">
-                <button className="btn btn-outline-success"  type="submit" >Login</button>
-                <Link className="btn btn-outline-info" href="/">Voltar</Link>
-            </div>
+       <div id="login-container">
+            <h1>Login</h1>
+            <form action="/admin" method="POST" id="login-form">
+                <label htmlFor="username">Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Digite seu usuário" />
+                
+                <label htmlFor="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" />
+                
+                <button type="submit" id="login-button">Entrar</button>
+                <Link  id="login-exit" href="/">Voltar</Link>
+            </form>
         </div>
-    </div>
-    </form>
+        {/* <div className="d-flex justify-content-center p-2">
+            <div className="col-md-4">
+                <div>
+                    <h2>Login</h2>
+                </div>
+                <div className="form-group">
+                    <label className="form-label" htmlFor="username">Usuário</label>
+                    <input type="text" id="username" name="username" className="form-control" />
+               </div>
+               <div className="form-group">
+                    <label className="form-label" htmlFor="password">Senha</label>  
+                    <input type="password" id="password" name="password" className="form-control" />
+                </div>
+                <div className="form-group p-2">
+                    <button className="btn btn-outline-success"  type="submit" >Login</button>
+                    <Link className="btn btn-outline-info" href="/">Voltar</Link>
+               </div>
+           </div>
+       </div> */}
+
     </div>  
   </>
   )

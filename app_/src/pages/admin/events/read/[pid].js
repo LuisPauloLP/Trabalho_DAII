@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 
 export default function readEvent() {
   
-  const API_URL = "http://localhost:8080/api/events/"
+  const API_URL = "http://localhost:3030/api/events/"
 
   const [event, setEvent] = useState({
     event_id: "",
@@ -17,6 +17,7 @@ export default function readEvent() {
     event_comments: "",
     event_date: "",
     event_location: "",
+    event_time: "",
     event_status: "",
     event_create_date: ""
   });
@@ -25,13 +26,6 @@ export default function readEvent() {
   const [pid] = useState(router.query.pid);
 
   const [message, setMensage] = useState({ message:"", status:""});
-
-  const optionsLevel = [
-    {value: '', text: '-- Selecione um nível de acesso --'},
-    {value: 'admin', text: 'Administrador'},
-    {value: 'user', text: 'Usuário'},
-    {value: 'reader', text: 'Leitor'},
-  ];
 
   const optionsStatus = [
     {value: '', text: '-- Selecione um estado --'},
@@ -75,7 +69,7 @@ export default function readEvent() {
         }
       </div>
   
-      <div className="d-flex justify-content-center p-2">
+      <div>
         <div className="container">
             <div className="row border-bottom">
                 <h3> Detalhes do Evento </h3>
@@ -100,6 +94,10 @@ export default function readEvent() {
                 <div className="form-group">
                     <label className="form-label" htmlFor="event_location">Localização</label>
                     <input type="text" id="event_location" name="event_location" className="form-control" value={event.event_location} readOnly/>
+                </div>
+                <div className="form-group">
+                    <label className="form-label" htmlFor="event_time">Hora</label>
+                    <input type="time" id="event_time" name="event_time" className="form-control" value={event.event_time} readOnly />
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="event_status">Status</label>

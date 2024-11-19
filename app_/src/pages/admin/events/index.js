@@ -9,7 +9,7 @@ import MenuEvents from '@/components/MenuEvents'
 
 export default function events() {
 
-  const API_URL = "http://localhost:8080/api/events"
+  const API_URL = "http://localhost:3030/api/events"
   
   const [events, setEvents] = useState([]); 
   
@@ -40,7 +40,7 @@ export default function events() {
       </div>
 
   
-      <div className="d-flex justify-content-center p-2">
+      <div>
         <div className="container">
         <div className="row border-bottom">
         <h3> Lista de Eventos </h3>
@@ -59,7 +59,7 @@ export default function events() {
         {events.map( event => (
             <tr key={event._id}>
               <th scope="row">{event._id}</th>
-              <td>{event.event_tittle}</td>
+              <td>{event.event_title}</td>
               <td>{event.event_description}</td>
               <td>
                 <EventAction pid={ event._id }></EventAction>
