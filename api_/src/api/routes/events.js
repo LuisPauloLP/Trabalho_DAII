@@ -20,7 +20,7 @@ const eventsSchema = new mongoose.Schema({
   event_date: { type: Date, required: true },
   event_time: { type: String, required: true },
   event_status: Boolean,
-  author_create_date: { type: Date, default: Date.now }
+  event_create_date: { type: Date, default: Date.now }
 });
 
 const Event = mongoose.model('Event', eventsSchema);
@@ -101,4 +101,3 @@ router.delete("/:pid", async (req, res) => {
 });
 
 module.exports = router;
-

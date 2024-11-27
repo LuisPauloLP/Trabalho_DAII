@@ -10,9 +10,11 @@ mongoose.connection.on('connected', () => {
 
 const professionalsSchema = new mongoose.Schema({
   professional_name: String,
+  professional_email: String,
   professional_speciality: String,
-  professional_contact: String,
-  professional_phone_number: String,
+  professional_pwd: String,
+  professional_level: String,
+  professional_phone_number: Number,
   professional_status: Boolean,
   professional_create_date: { type: Date, default: Date.now }
 });
@@ -34,7 +36,7 @@ router.get('/', async (req, res) => {
 router.get('/:pid', async (req, res) => {
     const pid = req.params.pid;
     try {
-      const foundedProfessional = await User.findById( pid );
+      const foundedProfessional = await Professional.findById( pid );
       console.log('Profissional encontrado com sucesso!');
       res.json({ message: 'Profissional encontrado com sucesso!', foundedProfessional });
     } catch (err) {
@@ -42,16 +44,16 @@ router.get('/:pid', async (req, res) => {
     }
 });
 
-// GET profissional especifico por nome
-router.get('/professionals', async (req, res) => {
-    const nome = req.params.professional;
-    try {
-     const docs = await Professional.find({ professional_name: nome });
-     res.json(docs);
-   } catch (err) {
-     res.status(500).json({ error: err.message });
-   }
- });
+// // GET profissional especifico por nome
+// router.get('/professionals', async (req, res) => {
+//     const nome = req.params.professional;
+//     try {
+//      const docs = await Professional.find({ professional_name: nome });
+//      res.json(docs);
+//    } catch (err) {
+//      res.status(500).json({ error: err.message });
+//    }
+//  });
 
 // POST cadastro de profissionais
 router.post('/', async (req, res) => {
@@ -74,10 +76,12 @@ router.put('/:pid', async (req, res) => {
       const updatedProfessional = await Professional.findByIdAndUpdate(pid, 
         { 
             professional_name: newProfessional.professional_name, 
+            professional_email: newProfessional.professional_email,
             professional_speciality: newProfessional.professional_speciality,
-            professional_contact: newProfessional.professional_contact,
-            professional_phone_number: newProfessional.professional_phone_number,
+            professional_pwd: newProfessional.professional_pwd,
+            professional_level: newProfessional.professional_level,
             professional_status: newProfessional.professional_status,
+            professional_phone_number: newProfessional.professional_phone_number,
         }, { new: true });
       console.log('Objeto Atualizado:', updatedProfessional);
       res.json({ message: 'Usuário alterado com sucesso!', updatedProfessional });

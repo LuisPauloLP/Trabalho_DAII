@@ -13,7 +13,7 @@ const studentsSchema = new mongoose.Schema({
     student_surname: String,
     student_cpf: Number,
     student_email: String,
-    student_date_of_born: Date,
+    student_date_of_born: { type: Date, required: true },
     student_phone: Number,
     student_cep: Number,
     student_logradouro: String,
