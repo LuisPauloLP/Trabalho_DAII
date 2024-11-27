@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import MenuAppointments from '@/components/MenuAppointments'; 
 
 export default function appointments() {
-  const API_URL = "http://localhost:8080/api/appointments";
+  const API_URL = "http://localhost:3030/api/appointments";
 
   const [appointment, setAppointment] = useState([]);
 
@@ -35,7 +35,7 @@ export default function appointments() {
         <MenuAppointments />
       </div>
 
-      <div className="d-flex justify-content-center p-2">
+      <div>
         <div className="container">
           <div className="row border-bottom">
             <h3> Lista de Agendamentos </h3>

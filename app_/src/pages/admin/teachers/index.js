@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import MenuTeachers from '@/components/MenuTeachers'; 
 
 export default function teachers() {
-  const API_URL = "http://localhost:8080/api/teachers";
+  const API_URL = "http://localhost:3030/api/teachers";
 
   const [teachers, setTeachers] = useState([]);
 
@@ -51,12 +51,12 @@ export default function teachers() {
               </thead>
               <tbody>
                 {teachers.map(teacher => (
-                  <tr key={teacher._id}>
-                    <th scope="row">{teacher._id}</th>
-                    <td>{teacher.author_name}</td>
-                    <td>{teacher.author_email}</td>
+                  <tr key={teacher.id}>
+                    <th scope="row">{teacher.id}</th>
+                    <td>{teacher.name}</td>
+                    <td>{teacher.email}</td>
                     <td>
-                      <TeacherAction pid={teacher._id}></TeacherAction>
+                      <TeacherAction pid={teacher.id}></TeacherAction>
                     </td>
                   </tr>
                 ))}

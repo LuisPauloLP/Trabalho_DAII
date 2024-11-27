@@ -19,6 +19,7 @@ export default function updateevent() {
     event_location: "",
     event_time: "",
     event_status: "",
+    event_create_date: ""
   });
 
   const router = useRouter();
@@ -59,14 +60,38 @@ export default function updateevent() {
 
       const handleUpdateEvent = async () => {
         try {
-          // Envia apenas os dados do evento e não o objeto completo
-          const response = await Axios.put(API_URL + pid, { event });
+          // Cria um novo objeto contendo apenas os dados que precisam ser enviados
+          const eventData = {
+            event_id: event.event_id,
+            event_title: event.event_title,
+            event_description: event.event_description,
+            event_comments: event.event_comments,
+            event_date: event.event_date,
+            event_location: event.event_location,
+            event_time: event.event_time,
+            event_status: event.event_status,
+            event_create_date: event.event_create_date
+          };
+      
+          // Envia os dados do evento limpos para a API
+          const response = await Axios.put(API_URL + pid, { event: eventData });
           setMensage({ message: response.data.message, status: "ok" });
         } catch (error) {
           console.error('Erro ao alterar o Evento:', error);
-          setMensage( { message: "Erro ao alterar o Evento!", status: "error"} );
+          setMensage({ message: "Erro ao alterar o Evento!", status: "error" });
         }
       };
+      
+      // const handleUpdateEvent = async () => {
+      //   try {
+      //     // Envia apenas os dados do evento e não o objeto completo
+      //     const response = await Axios.put(API_URL + pid, { event });
+      //     setMensage({ message: response.data.message, status: "ok" });
+      //   } catch (error) {
+      //     console.error('Erro ao alterar o Evento:', error);
+      //     setMensage( { message: "Erro ao alterar o Evento!", status: "error"} );
+      //   }
+      // };
       
 
 
@@ -128,6 +153,10 @@ export default function updateevent() {
                       ))}
                     </select>
                 </div>
+                <div className="form-group">
+                    <label className="form-label" htmlFor="event_create_date">Data de Criação</label>
+                    <input type="text" id="event_create_date" name="event_create_date" className="form-control" value={ event.event_create_date } readOnly />
+                </div> 
                 <div className="form-group p-2">
                     <button className="btn btn-outline-success" type="button" onClick={handleUpdateEvent} >Salvar</button>
                     <Link className="btn btn-outline-info" href="/admin/events">Voltar</Link>
@@ -147,10 +176,11 @@ export default function updateevent() {
 // import Axios from 'axios';
 // import { useRouter } from 'next/router';
 
-// export default function UpdateEvent() {
+// export default function updateevent() {
 //   const API_URL = "http://localhost:3030/api/events/";
 
 //   const [event, setEvent] = useState({
+//     event_id: "",
 //     event_title: "",
 //     event_description: "",
 //     event_comments: "",
@@ -158,11 +188,11 @@ export default function updateevent() {
 //     event_location: "",
 //     event_time: "",
 //     event_status: "",
-//     event_create_date: "",
+//     event_create_date: ""
 //   });
 
 //   const router = useRouter();
-//   const { pid } = router.query;
+//   const { pid } = router.query; // Obter pid diretamente do objeto query
 
 //   const [message, setMessage] = useState({ message: "", status: "" });
 
@@ -173,13 +203,20 @@ export default function updateevent() {
 //   ];
 
 //   useEffect(() => {
-//     const getEvent = async () => {
-//       if (!pid) return; // Aguarda até que o pid esteja disponível
+//     if (!pid) return; // Aguarda até que o pid esteja disponível
 
+//     const getEvent = async () => {
 //       try {
 //         const response = await Axios.get(API_URL + pid);
+//         const fetchedEvent = response.data.foundedEvent;
+
+//         // Formate a data para o formato YYYY-MM-DD
+//         if (fetchedEvent.event_date) {
+//           fetchedEvent.event_date = new Date(fetchedEvent.event_date).toISOString().split("T")[0];
+//         }
+
 //         setMessage({ message: response.data.message, status: "ok" });
-//         setEvent(response.data.foundedEvent);
+//         setEvent(fetchedEvent);
 //       } catch (error) {
 //         console.error('Erro ao buscar o evento:', error);
 //         setMessage({ message: "Erro ao buscar o evento!", status: "error" });
@@ -189,8 +226,8 @@ export default function updateevent() {
 //     getEvent();
 //   }, [pid]);
 
-//   const handleChange = (evento) => {
-//     const { name, value } = evento.target;
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
 //     setEvent((prevEvent) => ({
 //       ...prevEvent,
 //       [name]: value,
@@ -198,18 +235,18 @@ export default function updateevent() {
 //   };
 
 //   const handleUpdateEvent = async () => {
-//     // Cria uma cópia limpa do objeto 'event' para evitar circularidade
-//     const cleanEvent = {
-//       event_title: event.event_title,
-//       event_description: event.event_description,
-//       event_comments: event.event_comments,
-//       event_date: event.event_date,
-//       event_location: event.event_location,
-//       event_time: event.event_time,
-//       event_status: event.event_status,
-//     };
-
 //     try {
+//       // Limpe os dados para enviar apenas os campos relevantes
+//       const cleanEvent = {
+//         event_title: event.event_title,
+//         event_description: event.event_description,
+//         event_comments: event.event_comments,
+//         event_date: event.event_date,
+//         event_location: event.event_location,
+//         event_time: event.event_time,
+//         event_status: event.event_status,
+//       };
+
 //       const response = await Axios.put(API_URL + pid, cleanEvent);
 //       setMessage({ message: response.data.message, status: "ok" });
 //     } catch (error) {
@@ -242,109 +279,105 @@ export default function updateevent() {
 //         }
 //       </div>
 
-//       <div className="d-flex justify-content-center p-2">
-//         <div className="container">
-//           <div className="row border-bottom">
-//             <h3> Edição de Evento </h3>
-//             <form>
-//               <div className="form-group">
-//                 <label className="form-label" htmlFor="event_title">Título</label>
-//                 <input
-//                   type="text"
-//                   id="event_title"
-//                   name="event_title"
-//                   className="form-control"
-//                   value={event.event_title}
-//                   onChange={handleChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label className="form-label" htmlFor="event_description">Descrição</label>
-//                 <input
-//                   type="text"
-//                   id="event_description"
-//                   name="event_description"
-//                   className="form-control"
-//                   value={event.event_description}
-//                   onChange={handleChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label className="form-label" htmlFor="event_comments">Comentários</label>
-//                 <input
-//                   type="text"
-//                   id="event_comments"
-//                   name="event_comments"
-//                   className="form-control"
-//                   value={event.event_comments}
-//                   onChange={handleChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label className="form-label" htmlFor="event_date">Data</label>
-//                 <input
-//                   type="date"
-//                   id="event_date"
-//                   name="event_date"
-//                   className="form-control"
-//                   value={event.event_date}
-//                   onChange={handleChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label className="form-label" htmlFor="event_location">Localização</label>
-//                 <input
-//                   type="text"
-//                   id="event_location"
-//                   name="event_location"
-//                   className="form-control"
-//                   value={event.event_location}
-//                   onChange={handleChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label className="form-label" htmlFor="event_time">Hora</label>
-//                 <input
-//                   type="time"
-//                   id="event_time"
-//                   name="event_time"
-//                   className="form-control"
-//                   value={event.event_time}
-//                   onChange={handleChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label className="form-label" htmlFor="event_status">Status</label>
-//                 <select
-//                   className="form-select"
-//                   id="event_status"
-//                   name="event_status"
-//                   value={event.event_status}
-//                   onChange={handleChange}
-//                 >
-//                   {optionsStatus.map(option => (
-//                     <option key={option.value} value={option.value}>
-//                       {option.text}
-//                     </option>
-//                   ))}
-//                 </select>
-//               </div>
-//               <div className="form-group p-2">
-//                 <button
-//                   className="btn btn-outline-success"
-//                   type="button"
-//                   onClick={handleUpdateEvent}
-//                 >
-//                   Salvar
-//                 </button>
-//                 <Link className="btn btn-outline-info" href="/admin/events">Voltar</Link>
-//               </div>
-//             </form>
-//           </div>
+//       <div className="container">
+//         <div className="row border-bottom">
+//           <h3> Edição de Evento </h3>
+//           <form>
+//             <div className="form-group">
+//               <label className="form-label" htmlFor="event_title">Título</label>
+//               <input
+//                 type="text"
+//                 id="event_title"
+//                 name="event_title"
+//                 className="form-control"
+//                 value={event.event_title}
+//                 onChange={handleChange}
+//               />
+//             </div>
+//             <div className="form-group">
+//               <label className="form-label" htmlFor="event_description">Descrição</label>
+//               <input
+//                 type="text"
+//                 id="event_description"
+//                 name="event_description"
+//                 className="form-control"
+//                 value={event.event_description}
+//                 onChange={handleChange}
+//               />
+//             </div>
+//             <div className="form-group">
+//               <label className="form-label" htmlFor="event_comments">Comentários</label>
+//               <input
+//                 type="text"
+//                 id="event_comments"
+//                 name="event_comments"
+//                 className="form-control"
+//                 value={event.event_comments}
+//                 onChange={handleChange}
+//               />
+//             </div>
+//             <div className="form-group">
+//               <label className="form-label" htmlFor="event_date">Data</label>
+//               <input
+//                 type="date"
+//                 id="event_date"
+//                 name="event_date"
+//                 className="form-control"
+//                 value={event.event_date}
+//                 onChange={handleChange}
+//               />
+//             </div>
+//             <div className="form-group">
+//               <label className="form-label" htmlFor="event_location">Localização</label>
+//               <input
+//                 type="text"
+//                 id="event_location"
+//                 name="event_location"
+//                 className="form-control"
+//                 value={event.event_location}
+//                 onChange={handleChange}
+//               />
+//             </div>
+//             <div className="form-group">
+//               <label className="form-label" htmlFor="event_time">Hora</label>
+//               <input
+//                 type="time"
+//                 id="event_time"
+//                 name="event_time"
+//                 className="form-control"
+//                 value={event.event_time}
+//                 onChange={handleChange}
+//               />
+//             </div>
+//             <div className="form-group">
+//               <label className="form-label" htmlFor="event_status">Status</label>
+//               <select
+//                 className="form-select"
+//                 id="event_status"
+//                 name="event_status"
+//                 value={event.event_status}
+//                 onChange={handleChange}
+//               >
+//                 {optionsStatus.map(option => (
+//                   <option key={option.value} value={option.value}>
+//                     {option.text}
+//                   </option>
+//                 ))}
+//               </select>
+//             </div>
+//             <div className="form-group p-2">
+//               <button
+//                 className="btn btn-outline-success"
+//                 type="button"
+//                 onClick={handleUpdateEvent}
+//               >
+//                 Salvar
+//               </button>
+//               <Link className="btn btn-outline-info" href="/admin/events">Voltar</Link>
+//             </div>
+//           </form>
 //         </div>
 //       </div>
 //     </>
 //   );
 // }
-
-

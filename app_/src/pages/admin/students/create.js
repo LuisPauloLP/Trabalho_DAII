@@ -46,7 +46,7 @@ export default function createstudent() {
   const handleCreateStudent = async () => {
     try {
       const response = await Axios.post(API_URL, { student });
-      setMensage( { message: response.data.message , status: "ok"} );      
+      setMensage( { message: response.data.message, status: "ok"} );      
     } catch (error) {
       console.error('Erro ao criar o Estudante:', error);
       setMensage( { message: "Erro ao criar o Estudante!", status: "error"} );
@@ -56,8 +56,8 @@ export default function createstudent() {
   return (
     <>
       <Head>
-        <title>APP-BC</title>
-        <meta name="description" content="Cadastro de profissionais e alunos" />
+        <title>Estudantes</title>
+        <meta name="description" content="Cadastro de estudantes" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div>

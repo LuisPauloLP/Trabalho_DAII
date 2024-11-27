@@ -29,7 +29,8 @@ export default function readstudent() {
   });
 
   const router = useRouter();
-  const [pid] = useState(router.query.pid);
+  const { pid } = router.query;
+  //const [pid] = useState(router.query.pid);
 
   const [message, setMensage] = useState({ message:"", status:""});
 
@@ -40,21 +41,42 @@ export default function readstudent() {
   ];
 
 
-     useEffect(() => {
-        const getStudent = async () => {
-          try {
-            const response = await Axios.get(API_URL + pid);
-            setMensage( { message: response.data.message , status: "ok"} ); 
-            setStudent( response.data.foundedStudent );
-          } catch (error) {
-            console.error('Erro ao buscar os estudantes:', error);
-            setMensage( { message: "Erro ao buscar os Estudantes!", status: "error"} );
+    //  useEffect(() => {
+    //     const getStudent = async () => {
+    //       try {
+    //         const response = await Axios.get(API_URL + pid);
+    //         setMensage( { message: response.data.message , status: "ok"} ); 
+    //         setStudent( response.data.foundedStudent );
+    //       } catch (error) {
+    //         console.error('Erro ao buscar os estudantes:', error);
+    //         setMensage( { message: "Erro ao buscar os Estudantes!", status: "error"} );
+    //       }
+    //     };
+    useEffect(() => {
+      if (!pid) return; // Evita requisição até que pid esteja disponível
+  
+      const getStudent = async () => {
+        try {
+          const response = await Axios.get(API_URL + pid);
+          const fetchedStudent = response.data.foundedStudent;
+  
+          // Formata a data para YYYY-MM-DD
+          if (fetchedStudent.student_date_of_born) {
+            fetchedStudent.student_date_of_born = new Date(fetchedStudent.student_date_of_born).toISOString().split("T")[0];
           }
-        };
+  
+          setMensage({ message: response.data.message, status: "ok" });
+          setStudent(fetchedStudent);
+        } catch (error) {
+          console.error('Erro ao buscar o estudante:', error);
+          setMessage({ message: "Erro ao buscar o estudante!", status: "error" });
+        }
+      };
+  
     
         getStudent();
     
-      }, []);
+      }, [pid]);
 
 
 
@@ -71,7 +93,9 @@ export default function readstudent() {
         { 
           message.status==="" ? "" : 
           message.status==="ok" ? "" : 
-          <div className='alert alert-danger' role='alert'> { message.message } <Link className='alert-link' href='/admin/students'>Voltar</Link></div>
+          <div className='alert alert-danger' role='alert'> 
+            { message.message } <Link className='alert-link' href='/admin/students'>Voltar</Link>
+          </div>
         }
       </div>
   

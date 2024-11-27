@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 
 export default function deleteTeacher() {
   
-  const API_URL = "http://localhost:8080/api/teachers/" 
+  const API_URL = "http://localhost:3030/api/teachers/" 
 
   const [teacher, setTeacher] = useState({
     author_id: "",

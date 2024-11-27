@@ -7,7 +7,7 @@ import Axios from 'axios';
 import { useRouter } from 'next/router';
 
 export default function ReadTeacher() {
-  const API_URL = "http://localhost:8080/api/teachers/";
+  const API_URL = "http://localhost:3030/api/teachers/";
 
   const [teacher, setTeacher] = useState({
     id: "",

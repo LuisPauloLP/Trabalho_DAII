@@ -5,33 +5,34 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Axios from 'axios';
 
-export default function CreateProfessional() {
+export default function createprofessional() {
 
-  const API_URL = "http://localhost:8080/api/professionals";
+  const API_URL = "http://localhost:3030/api/professionals";
 
   const [professional, setProfessional] = useState({
-    professional_id: "",
+    //professional_id: "",
     professional_name: "",
     professional_email: "",
     professional_speciality: "",
     professional_pwd: "",
     professional_level: "",
     professional_phone_number: "",
-    professional_create_date: ""
+    professional_status: "",
+    //professional_create_date: ""
   });
 
   const [message, setMessage] = useState({ message: "", status: "" });
 
   const optionsStatus = [
     { value: '', text: '-- Selecione um estado --' },
-    { value: 'on', text: 'Ativo' },
-    { value: 'off', text: 'Inativo' },
+    { value: 'true', text: 'Ativo' },
+    { value: 'false', text: 'Inativo' },
   ];
 
   const optionsLevel = [
     {value: '', text: '-- Selecione um nível de acesso --'},
     {value: 'admin', text: 'Administrador'},
-    {value: 'user', text: 'Usuário'},
+    {value: 'teacher', text: 'Professor'},
     {value: 'reader', text: 'Leitor'},
   ];
 
@@ -45,7 +46,7 @@ export default function CreateProfessional() {
 
   const handleCreateProfessional = async () => {
     try {
-      const response = await Axios.post(API_URL, { professional });
+      const response = await Axios.post(API_URL,  { professional } );
       setMessage({ message: response.data.message, status: "ok" });
     } catch (error) {
       console.error('Erro ao criar o profissional:', error);
@@ -70,7 +71,7 @@ export default function CreateProfessional() {
         }
       </div>
 
-      <div className="d-flex justify-content-center p-2">
+      <div >
         <div className="container">
           <div className="row border-bottom">
             <h3> Cadastro de Profissional </h3>
@@ -114,14 +115,14 @@ export default function CreateProfessional() {
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="professional_phone_number">Telefone</label>
-                    <input type="number" id="professional_phone_number" name="professional_phone_number" className="form-control" value={professional.professional_phone_number} ronChange={handleChange} />
+                    <input type="number" id="professional_phone_number" name="professional_phone_number" className="form-control" value={professional.professional_phone_number} onChange={handleChange} />
                 </div>
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label className="form-label" htmlFor="professional_create_date">Data de Criação</label>
                     <input type="date" id="professional_create_date" name="professional_create_date" className="form-control" value={ professional.professional_create_date } onChange={handleChange}/>
-                </div>
+                </div> */}
                 <div className="form-group p-2">
-                    <button className="btn btn-outline-danger" type="button" onClick={handleCreateProfessional }>Salvar</button>
+                    <button className="btn btn-outline-danger" type="button" onClick={handleCreateProfessional}>Salvar</button>
                     <Link className="btn btn-outline-info" href="/admin/professionals">Voltar</Link>
                 </div>
             </form>

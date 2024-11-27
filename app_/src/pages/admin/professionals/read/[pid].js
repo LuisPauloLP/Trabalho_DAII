@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { useRouter } from 'next/router';
 
-export default function ReadProfessional() {
-  const API_URL = "http://localhost:8080/api/professionals/";
+export default function readprofessional() {
+  const API_URL = "http://localhost:3030/api/professionals/";
 
   const [professional, setProfessional] = useState({
     professional_id: "",
@@ -16,6 +16,7 @@ export default function ReadProfessional() {
     professional_speciality: "",
     professional_pwd: "",
     professional_level: "",
+    professional_status: "",
     professional_phone_number: "",
     professional_create_date: ""
   });
@@ -26,31 +27,31 @@ export default function ReadProfessional() {
   const [message, setMessage] = useState({ message: "", status: "" });
 
   const optionsLevel = [
+    {value: '', text: '-- Selecione um nível de acesso --'},
     { value: 'admin', text: 'Administrador' },
     { value: 'teacher', text: 'Professor' },
     { value: 'reader', text: 'Leitor' },
   ];
 
   const optionsStatus = [
-    { value: 'on', text: 'Ativo' },
-    { value: 'off', text: 'Inativo' },
+    {value: '', text: '-- Selecione um estado --'},
+    { value: 'true', text: 'Ativo' },
+    { value: 'false', text: 'Inativo' },
   ];
 
   useEffect(() => {
-    if (pid) {
       const getProfessional = async () => {
         try {
           const response = await Axios.get(API_URL + pid);
-          setProfessional(response.data.foundedProfessional);
           setMessage({ message: response.data.message, status: "ok" });
+          setProfessional(response.data.foundedProfessional);
         } catch (error) {
           console.error('Erro ao buscar o profissional:', error);
           setMessage({ message: "Erro ao buscar o profissional!", status: "error" });
         }
       };
       getProfessional();
-    }
-  }, [pid]);
+    }, []);
 
   return (
     <>
@@ -69,7 +70,7 @@ export default function ReadProfessional() {
         }
       </div>
 
-      <div className="d-flex justify-content-center p-2">
+      <div>
         <div className="container">
           <div className="row border-bottom">
             <h3>Detalhes do Profissional</h3>
@@ -117,7 +118,7 @@ export default function ReadProfessional() {
               </div>
               <div className="form-group">
                 <label className="form-label" htmlFor="professional_create_date">Data de Criação</label>
-                <input type="date" id="professional_create_date" name="professional_create_date" className="form-control" value={ professional.professional_create_date } readOnly />
+                <input type="text" id="professional_create_date" name="professional_create_date" className="form-control" value={ professional.professional_create_date } readOnly />
               </div>
               <div className="form-group p-2">
                 <Link className="btn btn-outline-info" href="/admin/professionals">Voltar</Link>

@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import MenuAppointments from '../../../../components/MenuAppointments';
 
 export default function ReadAppointments() {
-  const API_URL = "http://localhost:8080/api/appointments/";
+  const API_URL = "http://localhost:3030/api/appointments/";
 
   const [appointment, setAppointment] = useState({
     appointment_id: "",
@@ -58,7 +58,7 @@ export default function ReadAppointments() {
         }
       </div>
 
-      <div className="d-flex justify-content-center p-2">
+      <div >
         <div className="container">
           <div className="row border-bottom">
             <h3>Detalhes do Agendamento</h3>

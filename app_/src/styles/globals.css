@@ -274,6 +274,62 @@ h3 {
   margin-bottom: 1rem; /* Espaçamento inferior */
 }
 
+/* Home Page */
+#home-content {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+#home-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+#pages-info {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section h4 {
+  font-size: 1.2rem;
+  color: #3b6999;
+}
+
+section p {
+  font-size: 1rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+section a {
+  font-size: 1rem;
+  color: #5C7362;
+  text-decoration: none;
+}
+
+section a:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  #pages-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 /* Ajuste de responsividade - Em telas menores, a tabela deve ocupar o máximo possível */
 @media (max-width: 768px) {
   .table th, .table td {

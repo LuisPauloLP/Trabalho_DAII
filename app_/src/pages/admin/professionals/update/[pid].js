@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { useRouter } from 'next/router';
 
-export default function UpdateProfessional() {
+export default function updateprofessional() {
 
-  const API_URL = "http://localhost:8080/api/professionals/"
+  const API_URL = "http://localhost:3030/api/professionals/"
 
   const [professional, setProfessional] = useState({
     professional_id: "",
@@ -18,6 +18,7 @@ export default function UpdateProfessional() {
     professional_pwd: "",
     professional_level: "",
     professional_phone_number: "",
+    professional_status: "",
     professional_create_date: ""
   });
 
@@ -29,8 +30,14 @@ export default function UpdateProfessional() {
   const optionsLevel = [
     { value: '', text: '-- Selecione um nível de acesso --' },
     { value: 'admin', text: 'Administrador' },
-    { value: 'user', text: 'Usuário' },
+    { value: 'teacher', text: 'Professor' },
     { value: 'reader', text: 'Leitor' },
+  ];
+
+  const optionsStatus = [
+    {value: '', text: '-- Selecione um estado --'},
+    {value: 'true', text: 'Ativo'},
+    {value: 'false', text: 'Inativo'},
   ];
 
   useEffect(() => {
@@ -84,7 +91,7 @@ export default function UpdateProfessional() {
         }
       </div>
 
-      <div className="d-flex justify-content-center p-2">
+      <div >
         <div className="container">
           <div className="row border-bottom">
             <h3> Edição do Profissional </h3>
@@ -132,7 +139,7 @@ export default function UpdateProfessional() {
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="professional_create_date">Data de Criação</label>
-                    <input type="date" id="professional_create_date" name="professional_create_date" className="form-control" value={ professional.professional_create_date } onChange={handleChange} />
+                    <input type="text" id="professional_create_date" name="professional_create_date" className="form-control" value={ professional.professional_create_date } readOnly />
                 </div>
                 <div className="form-group p-2">
                     <button className="btn btn-outline-danger" type="button" onClick={handleUpdateProfessional}>Salvar</button>

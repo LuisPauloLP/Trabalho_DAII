@@ -73,13 +73,42 @@ export default function updatestudent() {
 
       const handleUpdateStudent = async () => {
         try {
-          const response = await Axios.put(API_URL + pid, { student });
-          setMensage( { message: response.data.message , status: "ok"} );      
+          // Cria um novo objeto contendo apenas os dados que precisam ser enviados
+          const studentData = {
+            student_id: student.student_id,
+            student_name: student.student_name,
+            student_surname: student.student_surname,
+            student_cpf: student.student_cpf,
+            student_email: student.student_email,
+            student_date_of_born: student.student_date_of_born,
+            student_phone: student.student_phone,
+            student_cep: student.student_cep,
+            student_logradouro: student.student_logradouro,
+            student_bairro: student.student_bairro,
+            student_city: student.student_city,
+            student_UF: student.student_UF,
+            student_user: student.student_user,
+            student_status: student.student_status,
+            student_create_date: student.student_create_date
+          };
+      
+          // Envia os dados do evento limpos para a API
+          const response = await Axios.put(API_URL + pid, { student: studentData });
+          setMensage({ message: response.data.message, status: "ok" });
         } catch (error) {
           console.error('Erro ao alterar o Estudante:', error);
-          setMensage( { message: "Erro ao alterar o Estudante!", status: "error"} );
+          setMensage({ message: "Erro ao alterar o Estudante!", status: "error" });
         }
       };
+      // const handleUpdateStudent = async () => {
+      //   try {
+      //     const response = await Axios.put(API_URL + pid, { student });
+      //     setMensage( { message: response.data.message , status: "ok"} );      
+      //   } catch (error) {
+      //     console.error('Erro ao alterar o Estudante:', error);
+      //     setMensage( { message: "Erro ao alterar o Estudante!", status: "error"} );
+      //   }
+      // };
 
 
 
