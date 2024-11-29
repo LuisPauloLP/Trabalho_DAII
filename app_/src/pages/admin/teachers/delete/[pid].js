@@ -11,14 +11,15 @@ export default function deleteTeacher() {
   const API_URL = "http://localhost:3030/api/teachers/" 
 
   const [teacher, setTeacher] = useState({
-    author_id: "",
-    author_name: "",
-    author_email: "",
-    author_disciplines: "",
-    author_pwd: "",
-    author_level: "",
-    author_phone_number: "",
-    author_create_date: ""
+    id: "",
+    name: "",
+    contact: "",
+    disciplines: "",
+    password: "",
+    level: "",
+    phone_number: "",
+    created_at: "",
+    status: "",
   });
 
   const router = useRouter();
@@ -44,7 +45,7 @@ export default function deleteTeacher() {
       try {
         const response = await Axios.get(API_URL + pid);
         setMessage({ message: response.data.message, status: "ok" });
-        setTeacher(response.data.foundedTeacher);
+        setTeacher(response.data);
       } catch (error) {
         console.error('Erro ao buscar os professores:', error);
         setMessage({ message: "Erro ao buscar o professor!", status: "error" });
@@ -84,28 +85,28 @@ export default function deleteTeacher() {
       <div className="d-flex justify-content-center p-2">
         <div className="container">
           <div className="row border-bottom">
-            <h3> Edição de Professor </h3>
+            <h3>Deseja deletar este Professor? </h3>
             
             <form method="POST">
               <div className="form-group">
-                <label className="form-label" htmlFor="author_name">Nome</label>
-                <input type="text" id="author_name" name="author_name" className="form-control" value={teacher.author_name} readOnly />
+                <label className="form-label" htmlFor="name">Nome</label>
+                <input type="text" id="name" name="name" className="form-control" value={teacher.name} readOnly />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_email">E-mail</label>
-                <input type="text" id="author_email" name="author_email" className="form-control" value={teacher.author_email} readOnly />
+                <label className="form-label" htmlFor="contact">E-mail</label>
+                <input type="text" id="contact" name="contact" className="form-control" value={teacher.contact} readOnly />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_disciplines">Disciplinas</label>
-                <input type="text" id="author_disciplines" name="author_disciplines" className="form-control" value={teacher.author_disciplines} readOnly />
+                <label className="form-label" htmlFor="disciplines">Disciplinas</label>
+                <input type="text" id="disciplines" name="disciplines" className="form-control" value={teacher.disciplines} readOnly />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_pwd">Senha</label>
-                <input type="password" id="author_pwd" name="author_pwd" className="form-control" value={teacher.author_pwd} readOnly />
+                <label className="form-label" htmlFor="password">Senha</label>
+                <input type="password" id="password" name="password" className="form-control" value={teacher.password} readOnly />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_level">Nível</label>
-                <select className="form-select" id="author_level" name="author_level" value={teacher.author_level} readOnly>
+                <label className="form-label" htmlFor="level">Nível</label>
+                <select className="form-select" id="level" name="level" value={teacher.level} readOnly>
                   {optionsLevel.map(option => (
                     <option key={option.value} value={option.value}>
                       {option.text}
@@ -124,8 +125,8 @@ export default function deleteTeacher() {
                 </select>
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_create_date">Data de Criação</label>
-                <input type="text" id="author_create_date" name="author_create_date" className="form-control" value={ teacher.author_create_date } readOnly />
+                <label className="form-label" htmlFor="created_at">Data de Criação</label>
+                <input type="text" id="created_at" name="created_at" className="form-control" value={ teacher.created_at } readOnly />
               </div>
               <div className="form-group p-2">
                 <button className="btn btn-outline-danger" type="button" onClick={handleDeleteTeacher}>Deletar</button>

@@ -12,12 +12,12 @@ export default function ReadTeacher() {
   const [teacher, setTeacher] = useState({
     id: "",
     name: "",
-    email: "",
+    contact: "",
     disciplines: "",
     password: "",
     level: "",
     phone_number: "",
-    create_date: "",
+    created_at: "",
     status: "",
   });
 
@@ -42,7 +42,7 @@ export default function ReadTeacher() {
       const getTeacher = async () => {
         try {
           const response = await Axios.get(API_URL + pid);
-          setTeacher(response.data.teacher);
+          setTeacher(response.data);
           setMessage({ message: response.data.message, status: "ok" });
         } catch (error) {
           console.error('Erro ao buscar o professor:', error);

@@ -11,14 +11,14 @@ export default function updateteacher() {
   const API_URL = "http://localhost:3030/api/teachers/"
 
   const [teacher, setTeacher] = useState({
-    author_id: "",
-    author_name: "",
-    author_email: "",
-    author_disciplines: "",
-    author_pwd: "",
-    author_level: "",
-    author_phone_number: "",
-    author_create_date: ""
+    id: "",
+    name: "",
+    contact: "",
+    disciplines: "",
+    password: "",
+    level: "",
+    phone_number: "",
+    created_at: ""
   });
 
   const router = useRouter();
@@ -38,7 +38,7 @@ export default function updateteacher() {
       try {
         const response = await Axios.get(API_URL + pid);
         setMensage({ message: response.data.message, status: "ok" });
-        setTeacher(response.data.foundedTeacher);
+        setTeacher(response.data);
       } catch (error) {
         console.error('Erro ao buscar os professores:', error);
         setMensage({ message: "Erro ao buscar os Professores!", status: "error" });
@@ -59,7 +59,7 @@ export default function updateteacher() {
 
   const handleUpdateTeacher = async () => {
     try {
-      const response = await Axios.put(API_URL + pid, { teacher });
+      const response = await Axios.put(API_URL + pid, teacher );
       setMensage({ message: response.data.message, status: "ok" });
     } catch (error) {
       console.error('Erro ao alterar o Professor:', error);
@@ -91,24 +91,24 @@ export default function updateteacher() {
 
             <form method="POST">
               <div className="form-group">
-                <label className="form-label" htmlFor="author_name">Nome</label>
-                <input type="text" id="author_name" name="author_name" className="form-control" value={teacher.author_name} onChange={handleChange} />
+                <label className="form-label" htmlFor="name">Nome</label>
+                <input type="text" id="name" name="name" className="form-control" value={teacher.name} onChange={handleChange} />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_email">E-mail</label>
-                <input type="text" id="author_email" name="author_email" className="form-control" value={teacher.author_email} onChange={handleChange} />
+                <label className="form-label" htmlFor="contact">E-mail</label>
+                <input type="text" id="contact" name="contact" className="form-control" value={teacher.contact} onChange={handleChange} />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_disciplines">Disciplinas</label>
-                <input type="text" id="author_disciplines" name="author_disciplines" className="form-control" value={teacher.author_disciplines} onChange={handleChange} />
+                <label className="form-label" htmlFor="disciplines">Disciplinas</label>
+                <input type="text" id="disciplines" name="disciplines" className="form-control" value={teacher.disciplines} onChange={handleChange} />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_pwd">Senha</label>
-                <input type="password" id="author_pwd" name="author_pwd" className="form-control" value={teacher.author_pwd} onChange={handleChange} />
+                <label className="form-label" htmlFor="password">Senha</label>
+                <input type="password" id="password" name="password" className="form-control" value={teacher.password} onChange={handleChange} />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_level">Nível</label>
-                <select className="form-select" id="author_level" name="author_level" value={teacher.author_level} onChange={handleChange}>
+                <label className="form-label" htmlFor="level">Nível</label>
+                <select className="form-select" id="level" name="level" value={teacher.level} onChange={handleChange}>
                   {optionsLevel.map(option => (
                     <option key={option.value} value={option.value}>
                       {option.text}
@@ -117,12 +117,12 @@ export default function updateteacher() {
                 </select>
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_phone_number">Telefone</label>
-                <input type="text" id="author_phone_number" name="author_phone_number" className="form-control" value={teacher.author_phone_number} onChange={handleChange} />
+                <label className="form-label" htmlFor="phone_number">Telefone</label>
+                <input type="text" id="phone_number" name="phone_number" className="form-control" value={teacher.phone_number} onChange={handleChange} />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="author_create_date">Data de Criação</label>
-                <input type="text" id="author_create_date" name="author_create_date" className="form-control" value={teacher.author_create_date} readOnly />
+                <label className="form-label" htmlFor="created_at">Data de Criação</label>
+                <input type="text" id="created_at" name="created_at" className="form-control" value={teacher.created_at} readOnly />
               </div>
               <div className="form-group p-2">
                 <button className="btn btn-outline-success" type="button" onClick={handleUpdateTeacher} >Salvar</button>
