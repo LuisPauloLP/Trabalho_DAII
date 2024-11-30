@@ -5,15 +5,22 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/bc', { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.on('connected', () => {
-    console.log('MongoDB conectado');
+    console.log('MongoDB conectado Agendamentos');
+});
+
+mongoose.connection.on('error', (err) => {
+    console.error('Erro na conexão com o MongoDB:', err);
 });
 
 const appointmentsSchema = new mongoose.Schema({
-    appointment_speciality: String,
+    appointment_student_name: String,
+    appointment_student_surmane: String,
+    appointment_professional_name: String,
+    appointment_professional_surname: String,
+    appointment_professional_speciality: String,
+    appointment_date: { type: Date, required: true },
+    appointment_time: { type: String, required: true },
     appointment_comments: String,
-    appointment_date: Date,
-    appointment_professional: String,
-    appointment_student: String,
     appointment_create_date: { type: Date, default: Date.now }
 });
   
@@ -34,46 +41,14 @@ router.get('/', async (req, res) => {
 router.get('/:pid', async (req, res) => {
     const pid = req.params.pid;
     try {
-        const foundedAppointment = await User.findById( pid );
+        const foundedAppointment = await Appointment.findById( pid );
         console.log('Agendamento encontrado com sucesso!');
-        res.json({ message: 'Agendament encontrado com sucesso!', foundedAppointment });
+        res.json({ message: 'Agendamento encontrado com sucesso!', foundedAppointment });
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
 });
 
-// GET agendamento especifico por nome do profissional
-router.get("/professional/:professional", async (req, res) => {
-    const nome = req.params.appointment;
-    try {
-        const docs = await Appointment.find({ appointment_professional: nome });
-        res.json(docs);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-// GET personagem especifico por nome do estudante
-router.get("/student/:student", async (req, res) => {
-    const nome = req.params.appointment;
-    try {
-        const docs = await Appointment.find({ appointment_student: nome });
-        res.json(docs);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-// GET personagem especifico por data
-router.get("/student/:student", async (req, res) => {
-    const data = req.params.appointment;
-    try {
-        const docs = await Appointment.find({ appointment_date: data });
-        res.json(docs);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
 
 // POST cadastro de agendamentos
 router.post('/', async (req, res) => {
@@ -95,11 +70,14 @@ router.put('/:pid', async (req, res) => {
     try {
       const updatedAppointment = await Appointment.findByIdAndUpdate(pid, 
         {
-            appointment_speciality: newAppointment.appointment_speciality, 
-            appointment_comments: newAppointment.appointment_comments,
+            appointment_student_name: newAppointment.appointment_student_name,
+            appointment_student_surmane: newAppointment.appointment_student_surname,
+            appointment_professional_name: newAppointment.appointment_professional_name,
+            appointment_professional_surname: newAppointment.appointment_professional_surname,
+            appointment_professional_speciality: newAppointment.appointment_professional_speciality,
             appointment_date: newAppointment.appointment_date,
-            appointment_professional: newAppointment.appointment_professional,
-            appointment_student: newAppointment.appointment_student,
+            appointment_time: newAppointment.appointment_time,
+            appointment_comments: newAppointment.appointment_comments,
         }, { new: true });
       console.log('Agendamento Atualizado:', updatedAppointment);
       res.json({ message: 'Agendamento alterado com sucesso!', updatedAppointment });
@@ -112,7 +90,7 @@ router.put('/:pid', async (req, res) => {
 router.delete('/:pid', async (req, res) => {
     const pid = req.params.pid;
     try {
-        const deletedAppointment = await User.findByIdAndDelete(pid);
+        const deletedAppointment = await Appointment.findByIdAndDelete(pid);
         console.log('Agendamento deletado:', deletedAppointment);
         res.json({ message: 'Agendamento deletado com sucesso!', deletedAppointment });
     } catch (err) {
