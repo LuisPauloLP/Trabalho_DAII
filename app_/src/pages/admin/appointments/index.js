@@ -8,7 +8,7 @@ import MenuAppointments from '@/components/MenuAppointments';
 export default function appointments() {
   const API_URL = "http://localhost:3030/api/appointments";
 
-  const [appointment, setAppointment] = useState([]);
+  const [appointments, setAppointment] = useState([]);
 
   useEffect(() => {
     const getAllAppointments = async () => {
@@ -46,28 +46,31 @@ export default function appointments() {
                   <th scope="col">#</th>
                   <th scope="col">Nome do Estudante</th>
                   <th scope="col">Nome do profissional</th>
-                  <th scope="col">Data do Agendamento</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Hora</th>
                   <th scope="col">Ação</th>
                 </tr>
               </thead>
-              <tbody>
-  {Array.isArray(appointments) && appointments.length > 0 ? (
-    appointments.map(appointment => (
-      <tr key={appointment._id}>
-        <th scope="row">{appointment._id}</th>
-        <td>{appointment.appointment_student_name}</td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-    </tr>
-  )}
-</tbody>
 
+              <tbody>
+                {appointments.map(appointment => (
+                  <tr key={appointment._id}>
+                    <th scope="row">{appointment._id}</th>
+                    <td>{appointment.appointment_student_name}</td>
+                    <td>{appointment.appointment_professional_name}</td>
+                    <td>{appointment.appointment_date}</td>
+                    <td>{appointment.appointment_time}</td>
+                    <td>
+                      <AppointmentAction pid={ appointment._id }></AppointmentAction>
+                    </td>
+                  </tr>
+                ))}
+
+              </tbody>
             </table>
           </div>
         </div>
       </div>
     </>
-  );
+  )
 }
