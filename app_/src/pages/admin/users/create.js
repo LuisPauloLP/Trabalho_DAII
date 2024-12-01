@@ -45,7 +45,7 @@ export default function createuser() {
 
   const handleCreateUser = async () => {
     try {
-      const response = await Axios.post(API_URL, { user });
+      const response = await Axios.post(API_URL,  user );
       setMensage( { message: response.data.message , status: "ok"} );      
     } catch (error) {
       console.error('Erro ao criar o Usuário:', error);
