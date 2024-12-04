@@ -13,7 +13,7 @@ export default function ReadTeacher() {
     id: "",
     name: "",
     contact: "",
-    disciplines: "",
+    school_disciplines: "",
     password: "",
     level: "",
     phone_number: "",
@@ -81,12 +81,12 @@ export default function ReadTeacher() {
                 <input type="text" id="name" name="name" className="form-control" value={teacher.name} readOnly />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="email">E-mail</label>
-                <input type="text" id="email" name="email" className="form-control" value={teacher.email} readOnly />
+                <label className="form-label" htmlFor="contact">E-mail</label>
+                <input type="text" id="contact" name="contact" className="form-control" value={teacher.contact} readOnly />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="disciplines">Disciplinas</label>
-                <input type="text" id="disciplines" name="disciplines" className="form-control" value={teacher.disciplines} readOnly />
+                <label className="form-label" htmlFor="school_disciplines">Disciplinas</label>
+                <input type="text" id="school_disciplines" name="school_disciplines" className="form-control" value={teacher.school_disciplines} readOnly />
               </div>
               <div className="form-group">
                 <label className="form-label" htmlFor="password">Senha</label>
@@ -117,8 +117,8 @@ export default function ReadTeacher() {
                 <input type="text" id="phone_number" name="phone_number" className="form-control" value={teacher.phone_number} readOnly />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="create_date">Data de Criação</label>
-                <input type="text" id="create_date" name="create_date" className="form-control" value={teacher.create_date} readOnly />
+                <label className="form-label" htmlFor="created_at">Data de Criação</label>
+                <input type="text" id="created_at" name="created_at" className="form-control" value={teacher.created_at} readOnly />
               </div>
               <div className="form-group p-2">
                 <Link className="btn btn-outline-info" href="/admin/teachers">Voltar</Link>

@@ -14,7 +14,7 @@ export default function deleteTeacher() {
     id: "",
     name: "",
     contact: "",
-    disciplines: "",
+    school_disciplines: "",
     password: "",
     level: "",
     phone_number: "",
@@ -97,8 +97,8 @@ export default function deleteTeacher() {
                 <input type="text" id="contact" name="contact" className="form-control" value={teacher.contact} readOnly />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="disciplines">Disciplinas</label>
-                <input type="text" id="disciplines" name="disciplines" className="form-control" value={teacher.disciplines} readOnly />
+                <label className="form-label" htmlFor="school_disciplines">Disciplinas</label>
+                <input type="text" id="school_disciplines" name="school_disciplines" className="form-control" value={teacher.school_disciplines} readOnly />
               </div>
               <div className="form-group">
                 <label className="form-label" htmlFor="password">Senha</label>

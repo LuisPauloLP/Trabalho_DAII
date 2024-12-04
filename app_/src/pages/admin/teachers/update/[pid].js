@@ -14,7 +14,7 @@ export default function updateteacher() {
     id: "",
     name: "",
     contact: "",
-    disciplines: "",
+    school_disciplines: "",
     password: "",
     level: "",
     phone_number: "",
@@ -99,8 +99,8 @@ export default function updateteacher() {
                 <input type="text" id="contact" name="contact" className="form-control" value={teacher.contact} onChange={handleChange} />
               </div>
               <div className="form-group">
-                <label className="form-label" htmlFor="disciplines">Disciplinas</label>
-                <input type="text" id="disciplines" name="disciplines" className="form-control" value={teacher.disciplines} onChange={handleChange} />
+                <label className="form-label" htmlFor="school_disciplines">Disciplinas</label>
+                <input type="text" id="school_disciplines" name="school_disciplines" className="form-control" value={teacher.school_disciplines} onChange={handleChange} />
               </div>
               <div className="form-group">
                 <label className="form-label" htmlFor="password">Senha</label>
